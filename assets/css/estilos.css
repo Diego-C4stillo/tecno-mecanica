@@ -1,0 +1,208 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.body-black { 
+    background: #161815;
+}
+
+.body-login {
+    background-image: url("../img/tecno-wallpaper-login.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.overlay-login {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(45, 117, 226, 0.3);
+}
+
+.section-padding {
+    padding: 25px 0;
+}
+
+.carousel-item {
+    height: 70vh;
+    min-height: 300px;
+}
+
+.carousel-caption {
+    bottom: 200px;
+    z-index: 2;
+}
+
+.carousel-caption h5 {
+    font-size: 45px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-top: 25;
+}
+
+/*.carousel-caption p {
+    width: 60%;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.9;
+}*/
+
+.carousel-inner::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    /*background: rgba(0, 30, 82, 0.327);*/
+    background: rgba(11, 23, 58, 0.45);
+    z-index: 1;
+}
+
+.navbar-nav a {
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.navbar-dark .navbar-brand {
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {
+    color: #000;
+}
+
+.w-100 {
+    height: 100vh;
+}
+
+.navbar-toggler{
+    padding: 1px 5px;
+    font-size: 18px;
+    line-height: 0.3;
+}
+
+.sm-icons {
+    flex-direction: row;
+
+}
+
+.about-text p{
+    font-size: 20px;
+    text-align: justify;
+}
+
+.sm-icons .nav-link{
+    padding-right: 1em;
+}
+
+.services .card-body i {
+    font-size: 50px;
+}
+
+.team .card-body i{
+    font-size: 20px;
+}
+
+/*footer*/
+
+a {
+    text-decoration: none;
+    font-size: 17px;
+}
+
+a:hover {
+    color: #0D6EFD !important; 
+    /*
+        USO DEL IMPORTANT, CAMBIO EL COLOR AZUL EN TODOS LOS LINKS
+        BORRAR SI ES NECESARIO
+    */
+}
+
+#logoContainer span::after{
+    content: "Instituto Superior Tecnológico Tecnoecuatoriano™";
+}
+
+.card-custom-login {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 30vh;
+}
+
+.card-custom-search {
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 10vh;
+}
+
+.card-search {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+@media(max-width: 767px){
+    .navbar-nav {
+        text-align: center;
+    }
+    
+    .carousel-item {
+        height: 70vh;
+    }
+    .carousel-caption {
+        font-size: 30px;
+    }
+    .carousel-caption h5 {
+        font-size: 15px;
+    }
+    .carousel-caption a {
+        padding: 10px 15px;
+        font-size: 15px;        
+    }
+    .carousel-caption p {
+        display: none;
+        /*
+        width: 100%;
+        line-height: 1.5;
+        font-size: 12px;
+        */
+    }
+    .about-text {
+        padding-top: 50px;
+    }
+    .card {
+        margin-bottom: 30px;
+    }
+    .section-padding {
+        padding: 50px 0;
+    }
+    .card-custom-search {
+        margin: 0 auto;
+        margin-top: 15vh;
+        margin-bottom: 15vh;
+    }
+}
+
+/* Estilo específico cuando el ancho de la pantalla es inferior o igual a 1028px */
+@media screen and (max-width: 1028px) {
+    #logoContainer span::after {
+        visibility: visible;
+        content: "ISTTE";
+    }
+    
+    #logoContainer span {
+        visibility: hidden;
+    }
+
+    /*#logoContainer span:before {
+        content: "ISTTE";    
+    }*/
+
+}

@@ -1,0 +1,108 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 40px;
+  background: url('../../assets/img/mecanica_wallpaper.jpg') no-repeat;
+  background-size: cover;
+}
+.capa{
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+  top: 0;left: 0;
+}
+/*cajas de texto recuperar contraseña*/
+.caja{
+  width: 100%;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  border-bottom: solid #929090 0.5px;
+}
+h1{
+  text-align: center;
+  padding: 18px;
+  font-size: 30px;
+  color: rgb(252, 249, 249);
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-weight: bold;
+  margin-bottom: 100px;
+}
+h2{
+  text-align: center;;
+  color: rgb(252, 249, 249);
+}
+
+.form-signin {
+  margin-top: 100px;
+  margin-left: 500px;
+  max-width: 400px;
+  padding: 15px;
+  background: rgba(30, 44, 240, 0.4);
+  border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+/*estilo para enviar correo de recuperación*/
+.form-signin input[type="email"] {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+/*estilo para cambiar contraseña*/
+.form-signin input[type="password"] {
+  margin-bottom: 5px;
+
+}
+/*boton de recuperar*/
+.boton{
+  margin-left: 30px;
+  background: rgb(0, 34, 128);
+  border-radius: 10px;
+  padding: 15px 25px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 20px;
+}
+.boton:hover{
+  background: rgb(117, 119, 117);
+}
+
+/*titulo del footer*/
+footer{
+  margin-top: 90px;
+  text-align: center;
+  padding: 50px;
+  font-size: 20px;
+  color: rgb(252, 249, 249);
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+/*estilos para expresiones regulares de valido en cambiar contraseña*/
+.valid-feedback{
+  font-size: 15px;
+  background-color: green;
+  color: white;
+  border-radius: 10px;
+  height: 50px;
+  text-align: center;
+  padding-top: 10px;
+}
+/*estilos para expresiones regulares de invalido en cambiar contraseña*/
+.invalid-feedback{
+  font-size: 15px;
+  background-color: yellow;
+  border-radius: 10px;
+}

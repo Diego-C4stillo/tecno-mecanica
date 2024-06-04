@@ -1,0 +1,111 @@
+body {
+    background: url("../img/mecanica_wallpaper.jpg") no-repeat;
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/*difuminar imagen de inicio*/
+.capa {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+/*titulo*/
+h1 {
+    color: #faf8f8;
+    text-align: center;
+    margin-top: 50px;
+}
+
+h2, h3 {
+    color: #faf8f8;
+}
+
+/* titulo imagenes*/
+p {
+    color: #faf8f8;
+    text-align: center;
+    margin-top: 50px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+/*buscador*/
+.search-bar {
+    width: 500px;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px #ccc;
+}
+.search-bar input[type="text"] {
+    width: 100%;
+    height: 100%;
+    border: none;
+    font-size: 18px;
+    outline: none;
+}
+/* imagen contenedor*/
+.image-container {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    margin-bottom: 20px;
+}
+.image-container img {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #ccc;
+}
+
+/*botones contenedor*/
+.button-container {
+    justify-content: center;
+    display: inline-flex;
+    width: 500px;
+}
+
+.button { 
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px #ccc;
+    text-decoration: none;
+    text-align: center;
+    line-height: 50px;
+}
+
+.button:hover {
+    background-color: #3e8e41;
+}
+
+.boton-busqueda{
+    
+    background: #efb810;
+    color: black;
+    padding: 10px 10px;
+    margin-top: -92px;
+    margin-left: -80px;
+    height: 75px;
+    text-decoration: none;
+    outline: 1px solid black;
+    border-radius: 5px;
+    position: absolute;
+    font-size: 18px;
+}
