@@ -58,6 +58,10 @@ if (isset($_POST['accion'])) {
             insert_inventario();
             break;
 
+        case 'insert_edit_matriz':
+            insert_edit_matriz();
+            break;
+
         case 'editar_estado_solicitud':
             editar_estado_solicitud();
             break;
@@ -660,6 +664,41 @@ function insert_inventario()
     }
 }
 
+function insert_edit_matriz()
+{
+    include "db.php";
+
+    $id = 1;
+    $nombreMatriz = $_POST['nombre'];
+    $direccionMatriz = $_POST['direccion'];
+
+    if (verificar_matriz()) {
+        $consulta = "UPDATE matriz SET Nombre = ?, Direccion = ? WHERE Id = ?";
+        $stmt = mysqli_prepare($conexion, $consulta);
+        mysqli_stmt_bind_param($stmt, "ssi", $nombreMatriz, $direccionMatriz, $id);
+    } else {
+        $consulta = "INSERT INTO matriz (Id, Nombre, Direccion)
+                     VALUES (?, ?, ?)";
+        $stmt = mysqli_prepare($conexion, $consulta);
+        mysqli_stmt_bind_param($stmt, "iss", $id, $nombreMatriz, $direccionMatriz);
+    }
+
+    $resultado = mysqli_stmt_execute($stmt);
+
+    if ($resultado) {
+        echo "<script language='JavaScript'>
+        location.href='../views/matriz.php?agregarMatriz=ok'; 
+            </script>";
+    } else {
+        mostrarAlerta('Se produjo un error al procesar la matriz.', '../views/matriz.php');
+    }
+
+    $stmt->close();
+
+    mysqli_close($conexion);
+
+}
+
 function editar_estado_solicitud()
 {
 
@@ -1189,6 +1228,18 @@ function verificar_maqueta($codigo)
     mysqli_close($conexion);
 
     return $fila['count'] > 0;
+}
+
+function verificar_matriz()
+{
+    include "db.php";
+
+    //$consulta = "SELECT COUNT(*) AS count FROM matriz WHERE Id = ?";
+    $consulta = "SELECT COUNT(*) as m FROM matriz WHERE Id = 1";
+    $result = $conexion->query($consulta);
+    $row = $result->fetch_assoc();
+
+    return $row['m'] > 0;
 }
 
 function config_editar_qr_herramienta()

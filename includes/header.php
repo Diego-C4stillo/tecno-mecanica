@@ -157,6 +157,35 @@ require "../includes/_sesion/validar.php";
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMatriz" aria-expanded="true" aria-controls="collapseMatriz">
+                    <i class="fas fa-school" aria-hidden="true"></i>
+                    <span>Matriz</span>
+                </a>
+                <div id="collapseMatriz" class="collapse" aria-labelledby="headingMatriz" data-parent="#accordionSidebar">
+                    <?php
+                    $result1 = mysqli_query($conexion, "SELECT * FROM matriz");
+                    $fila = mysqli_fetch_assoc($result1);
+                    if ($rolSesion == 'Administrador') { ?>
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Ver matriz</h6>
+                            <a class="collapse-item" href="../views/matriz.php">Mostrar matriz</a>
+                        </div>
+                    <?php } else {
+                    if (count($fila) > 0) { ?>
+                        <div class="bg-white collapse-inner rounded">
+                            <span class="collapse-item text-wrap"><?= htmlentities($fila['Nombre']) ?></span>
+                            <hr>
+                            <span class="collapse-item text-wrap"><?= htmlentities($fila['Direccion']) ?></span>
+                        </div>
+                    <?php } else {  ?>
+                        <div class="bg-white collapse-inner rounded">
+                            <span class="collapse-item text-wrap">Datos no disponibles</span>
+                        </div>
+                    <?php
+                    } } ?>
+                </div>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Heading -->
