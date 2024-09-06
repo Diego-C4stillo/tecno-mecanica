@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2024 a las 03:13:29
+-- Tiempo de generación: 06-09-2024 a las 17:14:39
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -61,17 +61,6 @@ CREATE TABLE `grupoherramientas` (
 INSERT INTO `grupoherramientas` (`IdGrupoH`, `Nombre`) VALUES
 (1, 'HERRAMIENTAS MANUALES'),
 (2, 'HERRAMIENTAS ELECTRICAS');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `grupomaquetas`
---
-
-CREATE TABLE `grupomaquetas` (
-  `IdGrupoM` int(10) UNSIGNED NOT NULL,
-  `Nombre` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -180,12 +169,13 @@ INSERT INTO `marcaherramientas` (`IdMarcaH`, `Nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `marcamaquetas`
+-- Estructura de tabla para la tabla `matriz`
 --
 
-CREATE TABLE `marcamaquetas` (
-  `IdMarcaM` int(10) UNSIGNED NOT NULL,
-  `Nombre` varchar(35) NOT NULL
+CREATE TABLE `matriz` (
+  `Id` int(11) NOT NULL,
+  `Nombre` varchar(255) NOT NULL,
+  `Direccion` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
@@ -237,17 +227,6 @@ INSERT INTO `ubicacionherramientas` (`IdUbicacionH`, `Nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ubicacionmaquetas`
---
-
-CREATE TABLE `ubicacionmaquetas` (
-  `IdUbicacionM` int(10) UNSIGNED NOT NULL,
-  `Nombre` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -292,12 +271,6 @@ ALTER TABLE `grupoherramientas`
   ADD PRIMARY KEY (`IdGrupoH`);
 
 --
--- Indices de la tabla `grupomaquetas`
---
-ALTER TABLE `grupomaquetas`
-  ADD PRIMARY KEY (`IdGrupoM`);
-
---
 -- Indices de la tabla `herramientas`
 --
 ALTER TABLE `herramientas`
@@ -326,12 +299,6 @@ ALTER TABLE `marcaherramientas`
   ADD PRIMARY KEY (`IdMarcaH`);
 
 --
--- Indices de la tabla `marcamaquetas`
---
-ALTER TABLE `marcamaquetas`
-  ADD PRIMARY KEY (`IdMarcaM`);
-
---
 -- Indices de la tabla `solicitudesareas`
 --
 ALTER TABLE `solicitudesareas`
@@ -344,12 +311,6 @@ ALTER TABLE `solicitudesareas`
 --
 ALTER TABLE `ubicacionherramientas`
   ADD PRIMARY KEY (`IdUbicacionH`);
-
---
--- Indices de la tabla `ubicacionmaquetas`
---
-ALTER TABLE `ubicacionmaquetas`
-  ADD PRIMARY KEY (`IdUbicacionM`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -377,12 +338,6 @@ ALTER TABLE `grupoherramientas`
   MODIFY `IdGrupoH` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `grupomaquetas`
---
-ALTER TABLE `grupomaquetas`
-  MODIFY `IdGrupoM` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `listaestudiantes`
 --
 ALTER TABLE `listaestudiantes`
@@ -395,12 +350,6 @@ ALTER TABLE `marcaherramientas`
   MODIFY `IdMarcaH` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `marcamaquetas`
---
-ALTER TABLE `marcamaquetas`
-  MODIFY `IdMarcaM` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `solicitudesareas`
 --
 ALTER TABLE `solicitudesareas`
@@ -411,12 +360,6 @@ ALTER TABLE `solicitudesareas`
 --
 ALTER TABLE `ubicacionherramientas`
   MODIFY `IdUbicacionH` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `ubicacionmaquetas`
---
-ALTER TABLE `ubicacionmaquetas`
-  MODIFY `IdUbicacionM` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
