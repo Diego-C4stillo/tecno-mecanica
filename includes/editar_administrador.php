@@ -64,7 +64,7 @@ include_once "header.php";
                             <select class="form-control" id="txtCarrera" name="txtCarrera">
                                 <?php
                                 include "../includes/db.php";
-                                $sql = "SELECT * FROM tecnomecanica.carreras ORDER BY NombreCarrera";
+                                $sql = "SELECT * FROM carreras ORDER BY NombreCarrera";
                                 $resultado = mysqli_query($conexion, $sql);
                                 $carreraSeleccionada = $administrador['IdCarrera'];
                                 while ($consulta = mysqli_fetch_array($resultado)) {
@@ -90,7 +90,7 @@ include_once "header.php";
                     <div class="col-md-12 col-lg-4">
                         <div class="form-group">
                             <label for="txtEmail" class="form-label">Correo electrónico*</label>
-                            <input type="email" id="txtEmail" name="txtEmail" class="form-control" value="<?php echo htmlentities($administrador['Email']); ?>">
+                            <input type="email" id="txtEmail" name="txtEmail" class="form-control" value="<?php echo htmlentities($administrador['Email']); ?>" readonly="readonly">
                             <div class="invalid-feedback">
                                 Ingresa un correo electrónico válido.
                             </div>
@@ -110,7 +110,7 @@ include_once "header.php";
                     <div class="col-md-12 col-lg-6">
                         <div class="form-group">
                             <label for="txtUsuario" class="form-label">Usuario*</label>
-                            <input type="text" id="txtUsuario" name="txtUsuario" class="form-control" value="<?php echo htmlentities($administrador['Usuario']); ?>" required>
+                            <input type="text" id="txtUsuario" name="txtUsuario" class="form-control" value="<?php echo htmlentities($administrador['Usuario']); ?>" required readonly="readonly">
                             <div class="invalid-feedback">
                                 Ingresa solo letras, una mayúscula, opcional dos números al final.
                             </div>

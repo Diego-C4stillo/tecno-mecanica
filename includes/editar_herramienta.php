@@ -51,7 +51,7 @@ include_once "header.php";
                                 <select class="form-control" id="txtUbicacion" name="txtUbicacion">
                                     <?php
                                     include "../includes/db.php";
-                                    $sql = "SELECT * FROM tecnomecanica.ubicacionherramientas ORDER BY IdUbicacionH";
+                                    $sql = "SELECT * FROM ubicacionherramientas ORDER BY IdUbicacionH";
                                     $resultado = mysqli_query($conexion, $sql);
                                     $ubicacionSeleccionada = $herramienta['IdUbicacion'];
                                     while ($consulta = mysqli_fetch_array($resultado)) {
@@ -71,7 +71,7 @@ include_once "header.php";
                                 <select class="form-control" id="txtGrupo" name="txtGrupo">
                                     <?php
                                     include "../includes/db.php";
-                                    $sql = "SELECT * FROM tecnomecanica.grupoherramientas ORDER BY IdGrupoH";
+                                    $sql = "SELECT * FROM grupoherramientas ORDER BY IdGrupoH";
                                     $resultado = mysqli_query($conexion, $sql);
                                     $grupoSeleccionado = $herramienta['IdGrupo'];
                                     while ($consulta = mysqli_fetch_array($resultado)) {
@@ -102,7 +102,7 @@ include_once "header.php";
                                 <select class="form-control" id="txtMarca" name="txtMarca">
                                     <?php
                                     include "../includes/db.php";
-                                    $sql = "SELECT * FROM tecnomecanica.marcaherramientas ORDER BY IdMarcaH";
+                                    $sql = "SELECT * FROM marcaherramientas ORDER BY IdMarcaH";
                                     $resultado = mysqli_query($conexion, $sql);
                                     $marcaSeleccionada = $herramienta['IdMarca'];
                                     while ($consulta = mysqli_fetch_array($resultado)) {

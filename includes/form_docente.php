@@ -44,7 +44,7 @@
                             <?php
 
                             include "../includes/db.php";
-                            $sql = "SELECT * FROM tecnomecanica.carreras ORDER BY NombreCarrera";
+                            $sql = "SELECT * FROM carreras ORDER BY NombreCarrera";
                             $resultado = mysqli_query($conexion, $sql);
                             while ($consulta = mysqli_fetch_array($resultado)) {
                                 echo '<option value="' . $consulta['IdCarrera'] . '">' . $consulta['NombreCarrera'] . '</option>';

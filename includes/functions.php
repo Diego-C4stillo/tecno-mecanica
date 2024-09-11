@@ -1,7 +1,8 @@
 <?php
 
+require_once("config.php");
 require_once("db.php");
-$dominio = "https://c855-190-89-45-21.ngrok-free.app/tecno-mecanica/";
+$dominio = ROOT;
 
 if (isset($_POST['accion'])) {
     switch ($_POST['accion']) {
@@ -146,12 +147,13 @@ function acceso_user()
     $_SESSION['Usuario'] = null;
     $usuario = $conexion->real_escape_string($_POST['txtUser']);
     $passwordUser = $conexion->real_escape_string($_POST['txtPassword']);
+    $estado = 1;
 
     // Prepara la consulta
-    $stmt = $conexion->prepare("SELECT pass FROM usuarios WHERE Usuario = ?");
+    $stmt = $conexion->prepare("SELECT pass FROM usuarios WHERE Usuario = ? AND EstadoUsuario = ?");
 
     // Vincula los parámetros
-    $stmt->bind_param("s", $usuario);
+    $stmt->bind_param("ss", $usuario, $estado);
 
     // Ejecuta la consulta
     $stmt->execute();
@@ -1108,9 +1110,9 @@ function verificar_usuario($nroCedula, $rol, $usuario, $email)
 {
     include "db.php";
 
-    $consulta = "SELECT COUNT(*) AS count FROM usuarios WHERE (Cedula = ? OR Usuario = ? OR Email = ?) AND (Rol = ?)";
+    $consulta = "SELECT COUNT(*) AS count FROM usuarios WHERE (Cedula = ? OR Usuario = ? OR Email = ?)";
     $stmt = mysqli_prepare($conexion, $consulta);
-    mysqli_stmt_bind_param($stmt, "ssss", $nroCedula, $usuario, $email, $rol);
+    mysqli_stmt_bind_param($stmt, "sss", $nroCedula, $usuario, $email);
     mysqli_stmt_execute($stmt);
 
     $resultado = mysqli_stmt_get_result($stmt);

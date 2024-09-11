@@ -171,19 +171,18 @@ require "../includes/_sesion/validar.php";
                             <h6 class="collapse-header">Ver matriz</h6>
                             <a class="collapse-item" href="../views/matriz.php">Mostrar matriz</a>
                         </div>
-                    <?php } else {
-                    if (count($fila) > 0) { ?>
-                        <div class="bg-white collapse-inner rounded">
-                            <span class="collapse-item text-wrap"><?= htmlentities($fila['Nombre']) ?></span>
-                            <hr>
-                            <span class="collapse-item text-wrap"><?= htmlentities($fila['Direccion']) ?></span>
-                        </div>
-                    <?php } else {  ?>
+                    <?php } else { ?>
+                        <?php if (isset($fila['Nombre']) && isset($fila['Direccion'])) { ?>
+                            <div class="bg-white collapse-inner rounded">
+                                <span class="collapse-item text-wrap"><?= htmlentities($fila['Nombre']) ?></span>
+                                <hr>
+                                <span class="collapse-item text-wrap"><?= htmlentities($fila['Direccion']) ?></span>
+                            </div>
+                        <?php } else { ?>
                         <div class="bg-white collapse-inner rounded">
                             <span class="collapse-item text-wrap">Datos no disponibles</span>
                         </div>
-                    <?php
-                    } } ?>
+                    <?php } } ?>
                 </div>
             </li>
             <!-- Divider -->

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-09-2024 a las 17:14:39
+-- Tiempo de generación: 11-09-2024 a las 23:12:18
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `tecnomecanica`
+-- Base de datos: `tecnomecanica_vacia`
 --
-CREATE DATABASE IF NOT EXISTS `tecnomecanica` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci;
-USE `tecnomecanica`;
+CREATE DATABASE IF NOT EXISTS `tecnomecanica_vacia` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci;
+USE `tecnomecanica_vacia`;
 
 -- --------------------------------------------------------
 
@@ -46,6 +46,46 @@ INSERT INTO `carreras` (`IdCarrera`, `NombreCarrera`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `detallessolicitudherramientas`
+--
+
+CREATE TABLE `detallessolicitudherramientas` (
+  `IdDetalleSolicitudHerramienta` int(10) UNSIGNED NOT NULL,
+  `IdSolicitud` int(10) UNSIGNED NOT NULL,
+  `CodigoHerramienta` varchar(10) NOT NULL,
+  `Cantidad` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detallessolicitudmaquetas`
+--
+
+CREATE TABLE `detallessolicitudmaquetas` (
+  `IdDetalleSolicitudMaqueta` int(10) UNSIGNED NOT NULL,
+  `IdSolicitud` int(10) UNSIGNED NOT NULL,
+  `CodigoMaqueta` varchar(10) NOT NULL,
+  `Cantidad` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `elementosprestados`
+--
+
+CREATE TABLE `elementosprestados` (
+  `IdElementoPrestados` int(10) UNSIGNED NOT NULL,
+  `IdPrestamo` int(10) UNSIGNED NOT NULL,
+  `IdElemento` varchar(10) NOT NULL,
+  `Cantidad` int(10) UNSIGNED NOT NULL,
+  `TipoElemento` enum('Herramienta','Maqueta') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `grupoherramientas`
 --
 
@@ -61,6 +101,17 @@ CREATE TABLE `grupoherramientas` (
 INSERT INTO `grupoherramientas` (`IdGrupoH`, `Nombre`) VALUES
 (1, 'HERRAMIENTAS MANUALES'),
 (2, 'HERRAMIENTAS ELECTRICAS');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `grupomaquetas`
+--
+
+CREATE TABLE `grupomaquetas` (
+  `IdGrupoM` int(10) UNSIGNED NOT NULL,
+  `Nombre` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -169,6 +220,17 @@ INSERT INTO `marcaherramientas` (`IdMarcaH`, `Nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `marcamaquetas`
+--
+
+CREATE TABLE `marcamaquetas` (
+  `IdMarcaM` int(10) UNSIGNED NOT NULL,
+  `Nombre` varchar(35) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `matriz`
 --
 
@@ -176,6 +238,22 @@ CREATE TABLE `matriz` (
   `Id` int(11) NOT NULL,
   `Nombre` varchar(255) NOT NULL,
   `Direccion` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `prestamos`
+--
+
+CREATE TABLE `prestamos` (
+  `IdPrestamo` int(10) UNSIGNED NOT NULL,
+  `IdUsuario` int(10) UNSIGNED NOT NULL,
+  `Periodo` tinyint(4) NOT NULL,
+  `FechaSolicitud` datetime NOT NULL,
+  `FechaDevolucionEstimada` datetime DEFAULT NULL,
+  `FechaDevolucionReal` datetime NOT NULL,
+  `Estado` enum('Prestado','Devuelto') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
@@ -208,6 +286,20 @@ CREATE TABLE `solicitudesareas` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `solicitudesimplementos`
+--
+
+CREATE TABLE `solicitudesimplementos` (
+  `IdSolicitud` int(10) UNSIGNED NOT NULL,
+  `IdUsuario` int(10) UNSIGNED NOT NULL,
+  `EstadoSolicitudImplementos` enum('Pendiente','Aprobada','Negada') NOT NULL,
+  `FechaSolicitud` datetime NOT NULL,
+  `Observaciones` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `ubicacionherramientas`
 --
 
@@ -223,6 +315,17 @@ CREATE TABLE `ubicacionherramientas` (
 INSERT INTO `ubicacionherramientas` (`IdUbicacionH`, `Nombre`) VALUES
 (1, 'A3'),
 (2, 'B1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ubicacionmaquetas`
+--
+
+CREATE TABLE `ubicacionmaquetas` (
+  `IdUbicacionM` int(10) UNSIGNED NOT NULL,
+  `Nombre` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -265,10 +368,40 @@ ALTER TABLE `carreras`
   ADD PRIMARY KEY (`IdCarrera`);
 
 --
+-- Indices de la tabla `detallessolicitudherramientas`
+--
+ALTER TABLE `detallessolicitudherramientas`
+  ADD PRIMARY KEY (`IdDetalleSolicitudHerramienta`),
+  ADD KEY `IdSolicitud` (`IdSolicitud`),
+  ADD KEY `CodigoHerramienta` (`CodigoHerramienta`);
+
+--
+-- Indices de la tabla `detallessolicitudmaquetas`
+--
+ALTER TABLE `detallessolicitudmaquetas`
+  ADD PRIMARY KEY (`IdDetalleSolicitudMaqueta`),
+  ADD KEY `IdSolicitud` (`IdSolicitud`),
+  ADD KEY `CodigoMaqueta` (`CodigoMaqueta`);
+
+--
+-- Indices de la tabla `elementosprestados`
+--
+ALTER TABLE `elementosprestados`
+  ADD PRIMARY KEY (`IdElementoPrestados`),
+  ADD KEY `elementosprestamos_ibfk_1_idx` (`IdPrestamo`),
+  ADD KEY `elementosprestamos_ibfk_2_idx` (`IdElemento`);
+
+--
 -- Indices de la tabla `grupoherramientas`
 --
 ALTER TABLE `grupoherramientas`
   ADD PRIMARY KEY (`IdGrupoH`);
+
+--
+-- Indices de la tabla `grupomaquetas`
+--
+ALTER TABLE `grupomaquetas`
+  ADD PRIMARY KEY (`IdGrupoM`);
 
 --
 -- Indices de la tabla `herramientas`
@@ -299,6 +432,19 @@ ALTER TABLE `marcaherramientas`
   ADD PRIMARY KEY (`IdMarcaH`);
 
 --
+-- Indices de la tabla `marcamaquetas`
+--
+ALTER TABLE `marcamaquetas`
+  ADD PRIMARY KEY (`IdMarcaM`);
+
+--
+-- Indices de la tabla `prestamos`
+--
+ALTER TABLE `prestamos`
+  ADD PRIMARY KEY (`IdPrestamo`),
+  ADD KEY `prestamos_ibfk_1_idx` (`IdUsuario`);
+
+--
 -- Indices de la tabla `solicitudesareas`
 --
 ALTER TABLE `solicitudesareas`
@@ -307,10 +453,23 @@ ALTER TABLE `solicitudesareas`
   ADD KEY `fk_IdUsuarioSolicitudTaller_idx` (`IdUsuario`);
 
 --
+-- Indices de la tabla `solicitudesimplementos`
+--
+ALTER TABLE `solicitudesimplementos`
+  ADD PRIMARY KEY (`IdSolicitud`),
+  ADD KEY `fk_idUsuario_idx` (`IdUsuario`);
+
+--
 -- Indices de la tabla `ubicacionherramientas`
 --
 ALTER TABLE `ubicacionherramientas`
   ADD PRIMARY KEY (`IdUbicacionH`);
+
+--
+-- Indices de la tabla `ubicacionmaquetas`
+--
+ALTER TABLE `ubicacionmaquetas`
+  ADD PRIMARY KEY (`IdUbicacionM`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -332,16 +491,40 @@ ALTER TABLE `carreras`
   MODIFY `IdCarrera` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `detallessolicitudherramientas`
+--
+ALTER TABLE `detallessolicitudherramientas`
+  MODIFY `IdDetalleSolicitudHerramienta` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `detallessolicitudmaquetas`
+--
+ALTER TABLE `detallessolicitudmaquetas`
+  MODIFY `IdDetalleSolicitudMaqueta` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `elementosprestados`
+--
+ALTER TABLE `elementosprestados`
+  MODIFY `IdElementoPrestados` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `grupoherramientas`
 --
 ALTER TABLE `grupoherramientas`
   MODIFY `IdGrupoH` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `grupomaquetas`
+--
+ALTER TABLE `grupomaquetas`
+  MODIFY `IdGrupoM` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `listaestudiantes`
 --
 ALTER TABLE `listaestudiantes`
-  MODIFY `IdListaEstudiantes` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `IdListaEstudiantes` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `marcaherramientas`
@@ -350,10 +533,28 @@ ALTER TABLE `marcaherramientas`
   MODIFY `IdMarcaH` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `marcamaquetas`
+--
+ALTER TABLE `marcamaquetas`
+  MODIFY `IdMarcaM` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `prestamos`
+--
+ALTER TABLE `prestamos`
+  MODIFY `IdPrestamo` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `solicitudesareas`
 --
 ALTER TABLE `solicitudesareas`
-  MODIFY `IdSolicitudArea` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `IdSolicitudArea` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `solicitudesimplementos`
+--
+ALTER TABLE `solicitudesimplementos`
+  MODIFY `IdSolicitud` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `ubicacionherramientas`
@@ -362,14 +563,42 @@ ALTER TABLE `ubicacionherramientas`
   MODIFY `IdUbicacionH` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `ubicacionmaquetas`
+--
+ALTER TABLE `ubicacionmaquetas`
+  MODIFY `IdUbicacionM` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `IdUsuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `IdUsuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `detallessolicitudherramientas`
+--
+ALTER TABLE `detallessolicitudherramientas`
+  ADD CONSTRAINT `detallessolicitudherramienta_ibfk_1` FOREIGN KEY (`IdSolicitud`) REFERENCES `solicitudesimplementos` (`IdSolicitud`),
+  ADD CONSTRAINT `detallessolicitudherramienta_ibfk_2` FOREIGN KEY (`CodigoHerramienta`) REFERENCES `herramientas` (`CodigoHerramienta`);
+
+--
+-- Filtros para la tabla `detallessolicitudmaquetas`
+--
+ALTER TABLE `detallessolicitudmaquetas`
+  ADD CONSTRAINT `detallessolicitudmaqueta_ibfk_1` FOREIGN KEY (`IdSolicitud`) REFERENCES `solicitudesimplementos` (`IdSolicitud`),
+  ADD CONSTRAINT `detallessolicitudmaqueta_ibfk_2` FOREIGN KEY (`CodigoMaqueta`) REFERENCES `maquetas` (`CodigoMaqueta`);
+
+--
+-- Filtros para la tabla `elementosprestados`
+--
+ALTER TABLE `elementosprestados`
+  ADD CONSTRAINT `elementosprestamos_ibfk_1` FOREIGN KEY (`IdPrestamo`) REFERENCES `prestamos` (`IdPrestamo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `elementosprestamos_ibfk_2` FOREIGN KEY (`IdElemento`) REFERENCES `herramientas` (`CodigoHerramienta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `elementosprestamos_ibfk_3` FOREIGN KEY (`IdElemento`) REFERENCES `maquetas` (`CodigoMaqueta`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `herramientas`
@@ -386,11 +615,23 @@ ALTER TABLE `listaestudiantes`
   ADD CONSTRAINT `fk_ListaEstudiantes` FOREIGN KEY (`IdSolicitud`) REFERENCES `solicitudesareas` (`IdSolicitudArea`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Filtros para la tabla `prestamos`
+--
+ALTER TABLE `prestamos`
+  ADD CONSTRAINT `fk_usuarioprestamos` FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios` (`IdUsuario`);
+
+--
 -- Filtros para la tabla `solicitudesareas`
 --
 ALTER TABLE `solicitudesareas`
   ADD CONSTRAINT `fk_CarreraSolicitudTaller` FOREIGN KEY (`IdCarrera`) REFERENCES `carreras` (`IdCarrera`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_IdUsuarioSolicitudTaller` FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios` (`IdUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `solicitudesimplementos`
+--
+ALTER TABLE `solicitudesimplementos`
+  ADD CONSTRAINT `fk_IdUsuarioSolicitudImplementos` FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios` (`IdUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `usuarios`

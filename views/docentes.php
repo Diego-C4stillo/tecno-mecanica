@@ -26,7 +26,7 @@ include "../includes/header.php";
                 echo 'El registro fue agregado correctamente';
                 break;
                 case 'existe':
-                    echo 'El docente ya se encuentra registrado';
+                    echo 'El usuario ya se encuentra registrado';
                     break;
             }
             ?>

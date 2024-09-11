@@ -26,7 +26,7 @@
                                     <?php
 
                                     include "../includes/db.php";
-                                    $sql = "SELECT * FROM tecnomecanica.ubicacionherramientas";
+                                    $sql = "SELECT * FROM ubicacionherramientas";
                                     $resultado = mysqli_query($conexion, $sql);
                                     while ($consulta = mysqli_fetch_array($resultado)) {
                                         echo '<option value="' . $consulta['IdUbicacionH'] . '">' . $consulta['Nombre'] . '</option>';
@@ -49,7 +49,7 @@
                                     <?php
 
                                     include "../includes/db.php";
-                                    $sql = "SELECT * FROM tecnomecanica.grupoherramientas";
+                                    $sql = "SELECT * FROM grupoherramientas";
                                     $resultado = mysqli_query($conexion, $sql);
                                     while ($consulta = mysqli_fetch_array($resultado)) {
                                         echo '<option value="' . $consulta['IdGrupoH'] . '">' . $consulta['Nombre'] . '</option>';
@@ -94,7 +94,7 @@
                                     <?php
 
                                     include "../includes/db.php";
-                                    $sql = "SELECT * FROM tecnomecanica.marcaherramientas";
+                                    $sql = "SELECT * FROM marcaherramientas";
                                     $resultado = mysqli_query($conexion, $sql);
                                     while ($consulta = mysqli_fetch_array($resultado)) {
                                         echo '<option value="' . $consulta['IdMarcaH'] . '">' . $consulta['Nombre'] . '</option>';

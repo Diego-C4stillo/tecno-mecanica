@@ -73,7 +73,7 @@ include_once "header.php";
                             <select class="form-control" id="txtCarrera" name="txtCarrera">
                                 <?php
                                 include "../includes/db.php";
-                                $sql = "SELECT * FROM tecnomecanica.carreras ORDER BY NombreCarrera";
+                                $sql = "SELECT * FROM carreras ORDER BY NombreCarrera";
                                 $resultado = mysqli_query($conexion, $sql);
                                 $carreraSeleccionada = $docente['IdCarrera'];
                                 while ($consulta = mysqli_fetch_array($resultado)) {
